@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HBD Sayangku ❤️</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0; padding: 0;
+            background: radial-gradient(circle, #1a1a2e 0%, #020205 100%);
+            color: white; font-family: 'Quicksand', sans-serif;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; overflow-x: hidden;
+        }
+        .page {
+            display: none; width: 85%; max-width: 450px;
+            text-align: center; animation: fadeIn 0.8s ease-in-out forwards;
+            flex-direction: column; align-items: center;
+        }
+        .active { display: flex; }
+        
+        h1 { font-family: 'Caveat', cursive; font-size: 45px; color: #ff4d6d; margin-bottom: 15px; text-shadow: 0 0 10px rgba(255,77,109,0.5); }
+        .pesan { font-size: 15px; line-height: 1.8; text-align: justify; margin-bottom: 25px; background: rgba(255,255,255,0.08); padding: 25px; border-radius: 20px; border-top: 3px solid #ff4d6d; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+
+        .frame {
+            width: 100%; border: 6px solid white; border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(255, 77, 109, 0.3);
+            margin-bottom: 25px; overflow: hidden; transform: rotate(-2deg);
+            background: #222;
+        }
+        .frame img { width: 100%; display: block; object-fit: cover; }
+
+        .btn-lanjut {
+            background: linear-gradient(45deg, #ff4d6d, #ff8fa3);
+            color: white; border: none; padding: 15px 35px;
+            border-radius: 50px; font-weight: bold; cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4); transition: 0.3s;
+        }
+        .btn-lanjut:hover { transform: scale(1.1); }
+
+        #timer-num { font-size: 130px; font-weight: bold; color: #ff4d6d; text-shadow: 0 0 30px #ff4d6d; margin: 20px 0; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+    </style>
+</head>
+<body>
+
+    <audio id="musik" src="https://cdn.pixabay.com/audio/2022/05/27/audio_1808d30d8e.mp3" loop></audio>
+
+    <div class="page active" id="p1">
+        <h1>Halo Sayang... ✨</h1>
+        <div class="frame">
+            <img src="https://i.ibb.co.com/TML5JrnP/Foto1.jpg">
+        </div>
+        <div class="pesan">
+            Hari ini adalah hari yang paling istimewa karena malaikat secantik kamu lahir ke dunia ini. Aku sangat bersyukur bisa memilikimu dan merayakan hari ini bersamamu. Setiap detik yang kita lalui adalah memori indah yang selalu aku simpan di hati.
+        </div>
+        <button class="btn-lanjut" onclick="pindah(2)">Lanjut ❤️</button>
+    </div>
+
+    <div class="page" id="p2">
+        <h1>Duniaku Indah ✨</h1>
+        <div class="frame" style="transform: rotate(2deg);">
+            <img src="https://i.ibb.co.com/TML5JrnP/Foto1.jpg">
+        </div>
+        <div class="pesan">
+            Gak kerasa ya waktu cepat berlalu. Makasih ya sudah jadi alasan aku bahagia setiap hari. Kamu itu bidadari yang dikirim Tuhan buat mewarnai hidup aku. Aku berharap senyummu gak pernah pudar selamanya.
+        </div>
+        <button class="btn-lanjut" onclick="mulaiTimer()">Lihat Kejutan 🎁</button>
+    </div>
+
+    <div class="page" id="p_timer">
+        <h1>Siap-siap ya... ❤️</h1>
+        <div id="timer-num">3</div>
+        <p>Kejutan besar menantimu!</p>
+    </div>
+
+    <div class="page" id="p3">
+        <h1>HAPPY BIRTHDAY SAYANG! 🎂🎉</h1>
+        <div class="pesan" style="text-align: center; border-top: none; border-bottom: 5px solid #ff4d6d;">
+            <b style="font-size: 20px; color: #ff4d6d;">DOA TULUS UNTUKMU</b><br><br>
+            Selamat ulang tahun, ratuku! Di usiamu yang baru ini, aku berdoa semoga Tuhan selalu melindungimu, memberikanmu kesehatan yang luar biasa, dan kebahagiaan yang tidak pernah berhenti mengalir.<br><br>
+            Semoga semua impian dan cita-citamu dikabulkan satu per satu. Tetaplah jadi orang baik, sabar, dan penyayang seperti yang aku kenal. Aku berjanji akan selalu ada di sampingmu, mendukungmu di masa sulit, dan tertawa bersamamu di masa senang. <br><br>
+            Terima kasih sudah lahir ke dunia dan menjadi bagian terindah dalam hidupku. I love you so much, now and forever! 💍💖
+        </div>
+        <button class="btn-lanjut" onclick="location.reload()">Ulangi Momen ❤️</button>
+    </div>
+
+    <script>
+        function pindah(n) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('p' + n).classList.add('active');
+            document.getElementById('musik').play().catch(e => console.log("Musik butuh interaksi"));
+        }
+
+        function mulaiTimer() {
+            pindah('_timer');
+            let angka = 3;
+            let el = document.getElementById('timer-num');
+            
+            let hitung = setInterval(() => {
+                angka--;
+                el.innerText = angka;
+                if (angka <= 0) {
+                    clearInterval(hitung);
+                    finalSurprise();
+                }
+            }, 1000);
+        }
+
+        function finalSurprise() {
+            pindah(3);
+            
+            // Kembang Api Meriah 20 detik
+            var end = Date.now() + (20 * 1000);
+            (function frame() {
+              confetti({ particleCount: 6, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ff4d6d', '#ffd700', '#ffffff'] });
+              confetti({ particleCount: 6, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#ff4d6d', '#ffd700', '#ffffff'] });
+              if (Date.now() < end) { requestAnimationFrame(frame); }
+            }());
+        }
+    </script>
+</body>
+</html>
